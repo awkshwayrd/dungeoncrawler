@@ -32,7 +32,7 @@ pub struct WantsToAttack {
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Health {
     pub current: i32,
-    pub max: i32
+    pub max: i32,
 }
 
 #[derive(Clone, PartialEq)]

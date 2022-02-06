@@ -1,14 +1,14 @@
 #![warn(clippy::all, clippy::pedantic)]
 
+mod combat;
 mod end_turn;
 mod entity_render;
+mod hud;
 mod map_render;
 mod movement;
 mod player_input;
 mod random_move;
-mod hud;
 mod tooltips;
-mod combat;
 
 use crate::prelude::*;
 
