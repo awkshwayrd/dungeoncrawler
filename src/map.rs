@@ -34,7 +34,6 @@ impl Map {
             None
         }
     }
-
 }
 
 pub fn map_idx(x: i32, y: i32) -> usize {
