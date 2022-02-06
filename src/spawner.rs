@@ -11,27 +11,35 @@ pub fn spawn_player(ecs: &mut World, pos: Point) {
             color: ColorPair::new(WHITE, BLACK),
             glyph: to_cp437('@'),
         },
-        Health { current: 20, max: 20},
+        Health {
+            current: 20,
+            max: 20,
+        },
     ));
 }
 
 //Add a monster entity with Enemy component tag to World
 pub fn spawn_monster(ecs: &mut World, rng: &mut RandomNumberGenerator, pos: Point) {
-    let (hp, name, glyph) = match rng.roll_dice(1,10) {
-        1..=8 => goblin(),
-        _ => orc()
+    let (hp, name, glyph) = match rng.roll_dice(1, 10) {
+        1..=7 => goblin(),
+        8 => ettin(),
+        9 => ogre(),
+        _ => orc(),
     };
 
-    ecs.push(
-        (Enemy,
-            pos,
-            Render{
-                color: ColorPair::new(WHITE, BLACK),
-                glyph,
-            },
+    ecs.push((
+        Enemy,
+        pos,
+        Render {
+            color: ColorPair::new(WHITE, BLACK),
+            glyph,
+        },
         MovingRandomly {},
-        Health{current: hp, max: hp},
-        Name(name)
+        Health {
+            current: hp,
+            max: hp,
+        },
+        Name(name),
     ));
 }
 
@@ -41,4 +49,12 @@ fn goblin() -> (i32, String, FontCharType) {
 
 fn orc() -> (i32, String, FontCharType) {
     (2, "Orc".to_string(), to_cp437('o'))
+}
+
+fn ettin() -> (i32, String, FontCharType) {
+    (1, "Ettin".to_string(), to_cp437('E'))
+}
+
+fn ogre() -> (i32, String, FontCharType) {
+    (2, "Ogre".to_string(), to_cp437('O'))
 }
